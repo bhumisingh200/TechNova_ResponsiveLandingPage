@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technova Internship Portal</title>
+  <meta name="description" content="Technova Internship Portal is a premium startup internship landing page with advanced programs, mentor-led projects, and career-ready pathways." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="loader" id="loader">
+    <div class="loader-ring"></div>
+    <p>Launching Technova...</p>
+  </div>
+
+  <header class="topbar">
+    <nav class="navbar container" aria-label="Primary Navigation">
+      <a href="#home" class="brand">Technova</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#programs">Programs</a>
+        <a href="#features">Features</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">☾</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="hero-grid container">
+        <div class="hero-copy">
+          <p class="eyebrow">Accelerate your career with immersive internships</p>
+          <h1>Launch Your Tech Career with <span>Technova</span></h1>
+          <p class="hero-text">Discover mentor-led internship pathways, real-world projects, and career-ready training across top technology domains.</p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Apply Now</a>
+            <a href="#programs" class="btn btn-secondary">Explore Programs</a>
+          </div>
+          <div class="typing-card">
+            <span>Internship domains:</span>
+            <strong id="typingText">Web Development</strong>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <h3>5000+</h3>
+              <p>Students Trained</p>
+            </div>
+            <div>
+              <h3>100+</h3>
+              <p>Industry Mentors</p>
+            </div>
+            <div>
+              <h3>50+</h3>
+              <p>Programs</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-illustration" aria-hidden="true">
+            <div class="floating-card card-a">
+              <div>
+                <span>Mentor Chat</span>
+                <p>Live feedback and career guidance.</p>
+              </div>
+            </div>
+            <div class="floating-card card-b">
+              <div>
+                <span>Project Brief</span>
+                <p>Build polished apps for your portfolio.</p>
+              </div>
+            </div>
+            <div class="hero-circle"></div>
+            <div class="hero-chart"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about section" id="about">
+      <div class="container section-grid">
+        <div class="section-heading">
+          <span class="section-label">About Technova</span>
+          <h2>Designed for ambitious learners and future technologists.</h2>
+          <p>Join a premium internship experience that blends structured learning, hands-on projects, and mentor support to fast-track your tech career.</p>
+        </div>
+        <div class="about-cards">
+          <article class="glass-card reveal">
+            <div class="icon">🚀</div>
+            <h3>Fast-paced training</h3>
+            <p>Intensive modules built to keep momentum and learning gain high.</p>
+          </article>
+          <article class="glass-card reveal">
+            <div class="icon">💡</div>
+            <h3>Career ready skills</h3>
+            <p>Attend workshops, mock interviews, and soft skill sessions.</p>
+          </article>
+          <article class="glass-card reveal">
+            <div class="icon">📁</div>
+            <h3>Portfolio projects</h3>
+            <p>Launch real-world applications that impress hiring teams.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats section" id="programs">
+      <div class="container stats-grid reveal-on-scroll">
+        <div class="stats-panel">
+          <h2>Technova by the numbers</h2>
+          <p>Our internship community has grown rapidly by delivering practical training and measurable outcomes.</p>
+        </div>
+        <div class="stats-counters">
+          <div class="stat-box">
+            <h3><span class="counter" data-target="5000">0</span>+</h3>
+            <p>Students Trained</p>
+          </div>
+          <div class="stat-box">
+            <h3><span class="counter" data-target="100">0</span>+</h3>
+            <p>Industry Mentors</p>
+          </div>
+          <div class="stat-box">
+            <h3><span class="counter" data-target="50">0</span>+</h3>
+            <p>Technology Programs</p>
+          </div>
+          <div class="stat-box">
+            <h3><span class="counter" data-target="95">0</span>%</h3>
+            <p>Completion Rate</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="domains section" id="domains">
+      <div class="container">
+        <div class="section-heading center">
+          <span class="section-label">Internship Domains</span>
+          <h2>Choose the technology pathway that fits your goals.</h2>
+        </div>
+        <div class="domain-grid">
+          <article class="domain-card reveal">
+            <div class="domain-icon"></div>
+            <h3>Web Development</h3>
+            <p>Build responsive sites, React apps, and modern web experiences.</p>
+          </article>
+          <article class="domain-card reveal">
+            <div class="domain-icon">☕</div>
+            <h3>Java Development</h3>
+            <p>Master object-oriented design, backend APIs, and enterprise tooling.</p>
+          </article>
+          <article class="domain-card reveal">
+            <div class="domain-icon">🤖</div>
+            <h3>AI &amp; Machine Learning</h3>
+            <p>Train models, process data, and deploy intelligent systems.</p>
+          </article>
+          <article class="domain-card reveal">
+            <div class="domain-icon">📊</div>
+            <h3>Data Science</h3>
+            <p>Analyze datasets, build pipelines, and visualize insights.</p>
+          </article>
+          <article class="domain-card reveal">
+            <div class="domain-icon">🔒</div>
+            <h3>Cyber Security</h3>
+            <p>Learn defense techniques, risk assessment, and secure architectures.</p>
+          </article>
+          <article class="domain-card reveal">
+            <div class="domain-icon">🎨</div>
+            <h3>UI/UX Design</h3>
+            <p>Create polished interfaces and memorable product experiences.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="journey section" id="journey">
+      <div class="container journey-grid">
+        <div class="journey-copy reveal">
+          <span class="section-label">Learning Journey</span>
+          <h2>Follow a structured path from registration to certification.</h2>
+          <p>Every stage is designed to keep you focused, productive, and portfolio-ready.</p>
+        </div>
+        <div class="timeline reveal">
+          <div class="timeline-step">
+            <span>01</span>
+            <h3>Register</h3>
+            <p>Choose your internship track and enroll in minutes.</p>
+          </div>
+          <div class="timeline-line"></div>
+          <div class="timeline-step">
+            <span>02</span>
+            <h3>Learn</h3>
+            <p>Attend guided lessons, workshops, and mentor sessions.</p>
+          </div>
+          <div class="timeline-line"></div>
+          <div class="timeline-step">
+            <span>03</span>
+            <h3>Build Projects</h3>
+            <p>Create real applications that demonstrate your skills.</p>
+          </div>
+          <div class="timeline-line"></div>
+          <div class="timeline-step">
+            <span>04</span>
+            <h3>Submit Tasks</h3>
+            <p>Receive feedback and iterate until your work shines.</p>
+          </div>
+          <div class="timeline-line"></div>
+          <div class="timeline-step">
+            <span>05</span>
+            <h3>Get Certified</h3>
+            <p>Earn a recognized certificate and launch your tech journey.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features section" id="features">
+      <div class="container">
+        <div class="section-heading center">
+          <span class="section-label">Core Features</span>
+          <h2>Premium internship experience with practical support.</h2>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon">🧩</div>
+            <h3>Industry Projects</h3>
+            <p>Work on real assignments that mirror company needs.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">🧑‍🏫</div>
+            <h3>Mentor Guidance</h3>
+            <p>Receive expert feedback from experienced technologists.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">🎓</div>
+            <h3>Certification</h3>
+            <p>Get a badge after completing milestones and submitting tasks.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">⏱️</div>
+            <h3>Flexible Learning</h3>
+            <p>Balance internships with your schedule and workflow.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">🤝</div>
+            <h3>Placement Support</h3>
+            <p>Access career services and interview preparation content.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">🌐</div>
+            <h3>Community Access</h3>
+            <p>Collaborate with peers, ask questions, and share progress.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects section" id="projects">
+      <div class="container">
+        <div class="section-heading center">
+          <span class="section-label">Featured Projects</span>
+          <h2>Showcase internship work that stands out.</h2>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card reveal">
+            <div class="project-image image-1"></div>
+            <div class="project-content">
+              <h3>Portfolio Website</h3>
+              <p>Responsive personal portfolio built with HTML, CSS, and JavaScript.</p>
+              <p class="project-stack">Stack: HTML • CSS • JS</p>
+              <a href="#contact" class="project-btn">View Details</a>
+            </div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-image image-2"></div>
+            <div class="project-content">
+              <h3>Calculator App</h3>
+              <p>Interactive calculator with clean UI and smooth input animation.</p>
+              <p class="project-stack">Stack: JS • UI Design</p>
+              <a href="#contact" class="project-btn">View Details</a>
+            </div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-image image-3"></div>
+            <div class="project-content">
+              <h3>Image Gallery</h3>
+              <p>Dynamic media gallery with filters, hover states, and lightbox style styling.</p>
+              <p class="project-stack">Stack: CSS • JS</p>
+              <a href="#contact" class="project-btn">View Details</a>
+            </div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-image image-4"></div>
+            <div class="project-content">
+              <h3>To-Do Application</h3>
+              <p>Task manager with persistence, interactive controls, and neat design.</p>
+              <p class="project-stack">Stack: JS • Local Storage</p>
+              <a href="#contact" class="project-btn">View Details</a>
+            </div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-image image-5"></div>
+            <div class="project-content">
+              <h3>Quiz Application</h3>
+              <p>Gamified knowledge check with scoring, pacing, and animations.</p>
+              <p class="project-stack">Stack: JS • UX</p>
+              <a href="#contact" class="project-btn">View Details</a>
+            </div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-image image-6"></div>
+            <div class="project-content">
+              <h3>Weather Dashboard</h3>
+              <p>Weather search tool with forecasts and polished UI interactions.</p>
+              <p class="project-stack">Stack: API • JS</p>
+              <a href="#contact" class="project-btn">View Details</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials section" id="testimonials">
+      <div class="container">
+        <div class="section-heading center">
+          <span class="section-label">Testimonials</span>
+          <h2>What our interns are saying.</h2>
+        </div>
+        <div class="testimonial-slider" id="testimonialSlider">
+          <article class="testimonial-card active">
+            <div class="testimonial-top">
+              <div class="testimonial-avatar">AH</div>
+              <div>
+                <h3>Ayla Hassan</h3>
+                <p>Frontend Intern</p>
+              </div>
+            </div>
+            <p>"Technova helped me transition from beginner to confident developer with hands-on projects and amazing mentor support."</p>
+            <div class="stars">★★★★★</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-avatar">RK</div>
+              <div>
+                <h3>Riya Kumar</h3>
+                <p>AI Intern</p>
+              </div>
+            </div>
+            <p>"The AI/ML track was structured, practical and the feedback loop made every project stronger."</p>
+            <div class="stars">★★★★★</div>
+          </article>
+          <article class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-avatar">NL</div>
+              <div>
+                <h3>Noah Lee</h3>
+                <p>Security Intern</p>
+              </div>
+            </div>
+            <p>"I appreciated the clear goals, milestone reviews, and the real-world security tasks that boosted my profile."</p>
+            <div class="stars">★★★★★</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq section" id="faq">
+      <div class="container">
+        <div class="section-heading center">
+          <span class="section-label">FAQ</span>
+          <h2>Frequently asked questions</h2>
+        </div>
+        <div class="faq-grid">
+          <article class="faq-item reveal">
+            <button class="faq-question" aria-expanded="false">How do I apply?</button>
+            <div class="faq-answer">
+              <p>Fill the form below or reach out via email, then pick your preferred program and complete the onboarding steps.</p>
+            </div>
+          </article>
+          <article class="faq-item reveal">
+            <button class="faq-question" aria-expanded="false">Is the internship remote?</button>
+            <div class="faq-answer">
+              <p>Yes, the program is fully remote with flexible collaboration tools and live mentor sessions.</p>
+            </div>
+          </article>
+          <article class="faq-item reveal">
+            <button class="faq-question" aria-expanded="false">Do I receive a certificate?</button>
+            <div class="faq-answer">
+              <p>Every intern who completes tasks and final reviews receives a Technova certification badge.</p>
+            </div>
+          </article>
+          <article class="faq-item reveal">
+            <button class="faq-question" aria-expanded="false">How are tasks evaluated?</button>
+            <div class="faq-answer">
+              <p>Mentors review deliverables against quality standards and provide improvement feedback for every submission.</p>
+            </div>
+          </article>
+          <article class="faq-item reveal">
+            <button class="faq-question" aria-expanded="false">What technologies are covered?</button>
+            <div class="faq-answer">
+              <p>We cover web, Java, data science, AI, cyber security, and product design fundamentals in a well-rounded curriculum.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter section" id="newsletter">
+      <div class="container newsletter-card reveal">
+        <div>
+          <span class="section-label">Newsletter</span>
+          <h2>Stay updated with new internship launches.</h2>
+          <p>Get early access to program openings, tips, and application reminders.</p>
+        </div>
+        <form id="newsletterForm" class="newsletter-form" novalidate>
+          <div class="input-group">
+            <label for="newsletterEmail" class="sr-only">Email</label>
+            <input id="newsletterEmail" name="newsletterEmail" type="email" placeholder="Enter your email address" required />
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </div>
+          <p class="input-message" id="newsletterMessage"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="contact section" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-info reveal">
+          <span class="section-label">Internship Application</span>
+          <h2>Apply to become a Technova intern.</h2>
+          <p>Fill out the application with your profiles and resume to start the approval process.</p>
+          <div class="contact-details">
+            <div>
+              <h3>Email</h3>
+              <p>hello@technova.com</p>
+            </div>
+            <div>
+              <h3>Support</h3>
+              <p>support@technova.com</p>
+            </div>
+            <div>
+              <h3>Follow</h3>
+              <p>@TechNovaPortal</p>
+            </div>
+          </div>
+        </div>
+        <form id="contactForm" class="contact-form reveal" enctype="multipart/form-data" novalidate>
+          <div class="input-group">
+            <label for="fullName">Full Name</label>
+            <input id="fullName" name="fullName" type="text" placeholder="Your full name" required />
+            <span class="error-message"></span>
+          </div>
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            <span class="error-message"></span>
+          </div>
+          <div class="input-group">
+            <label for="github">GitHub Profile</label>
+            <input id="github" name="github" type="url" placeholder="https://github.com/yourname" required />
+            <span class="error-message"></span>
+          </div>
+          <div class="input-group">
+            <label for="linkedin">LinkedIn Profile</label>
+            <input id="linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/yourname" required />
+            <span class="error-message"></span>
+          </div>
+          <div class="input-group">
+            <label for="leetcode">LeetCode Profile</label>
+            <input id="leetcode" name="leetcode" type="url" placeholder="https://leetcode.com/yourname" required />
+            <span class="error-message"></span>
+          </div>
+          <div class="input-group">
+            <label for="domain">Internship Domain</label>
+            <select id="domain" name="domain" required>
+              <option value="">Select a domain</option>
+              <option>Web Development</option>
+              <option>Java Development</option>
+              <option>AI & Machine Learning</option>
+              <option>Data Science</option>
+              <option>Cyber Security</option>
+              <option>UI/UX Design</option>
+            </select>
+            <span class="error-message"></span>
+          </div>
+          <div class="input-group">
+            <label for="resume">Resume (PDF)</label>
+            <input id="resume" name="resume" type="file" accept="application/pdf" required />
+            <span class="error-message"></span>
+          </div>
+          <div class="input-group">
+            <label for="message">Tell us about your goals</label>
+            <textarea id="message" name="message" rows="5" placeholder="Share your aspirations and project experience" required></textarea>
+            <span class="error-message"></span>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit Application</button>
+          <p class="form-message" id="formMessage"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <footer class="footer section">
+    <div class="container footer-grid">
+      <div>
+        <a href="#home" class="brand footer-brand">Technova</a>
+        <p>Premium internship portal for aspiring technologists and portfolio builders.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <a href="#about">About</a>
+        <a href="#programs">Programs</a>
+        <a href="#features">Features</a>
+      </div>
+      <div>
+        <h3>Categories</h3>
+        <a href="#domains">Web Dev</a>
+        <a href="#domains">AI/ML</a>
+        <a href="#domains">Cyber Security</a>
+      </div>
+      <div>
+        <h3>Follow Us</h3>
+        <div class="social-links">
+          <a href="#">LinkedIn</a>
+          <a href="#">Twitter</a>
+          <a href="#">Dribbble</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Technova. Designed for modern internship journeys.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

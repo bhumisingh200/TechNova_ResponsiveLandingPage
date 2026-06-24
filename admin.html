@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technova Admin Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="admin-page">
+  <header class="topbar admin-topbar">
+    <div class="container navbar">
+      <a href="/admin" class="brand">Technova Admin</a>
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/logout">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="section admin-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">Admin Portal</span>
+        <h2>Review applicant submissions and approve offers.</h2>
+        <p>Applications are stored securely and can be approved with a single click. Offer emails are generated automatically.</p>
+      </div>
+      <div class="admin-panel" id="adminPanel">
+        <p class="loading-text">Loading applications...</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>

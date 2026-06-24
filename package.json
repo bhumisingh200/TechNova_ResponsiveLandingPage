@@ -1,0 +1,16 @@
+{
+  "name": "technova-internship-portal",
+  "version": "1.0.0",
+  "description": "Technova Internship Portal with applicant login, admin approval workflow, and email offer generation.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.4",
+    "express-session": "^1.17.4",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.4"
+  }
+}
