@@ -1,162 +1,511 @@
-# Technova Internship Portal
+# 🚀 TechNova Internship Portal
 
-> A premium, modern, fully responsive internship portal with student application submission, admin dashboard for review & approval, and automated offer letter generation.
+<div align="center">
 
----
+### A Premium Full-Stack Internship Management Platform
 
-## ✨ Features
+Modern • Responsive • Secure • Feature-Rich
 
-### User-Facing Features
-- **Hero Section** with typing animations and floating cards.
-- **Internship Domain Showcase** (Web Dev, Java, AI/ML, Data Science, Cyber Security, UI/UX).
-- **Learning Journey Timeline** with 5-step interactive process.
-- **Animated Statistics Counter** (scrolls on viewport entrance).
-- **Testimonials Carousel** with auto-slide and manually indexed dot markers.
-- **FAQ Accordion** with smooth expand/collapse.
-- **Interactive Application Form** collecting GitHub, LinkedIn, LeetCode, and resume files.
-- **Milestone Onboarding Dashboard** displaying current status (None, Pending, Approved, Accepted) and onboarding tasks once approved.
-- **Download & Email Offer**: Candidates can download their official offer letter as a beautiful offline HTML document or trigger a copy to be emailed to their inbox on-demand from their status modal.
-- **Dark/Light Theme Toggle** (persists via localStorage and prevents theme flashes on login/admin pages).
-- **Premium Glassmorphic Aesthetics** with beautiful gradient overlays, smooth scroll transitions, and custom scrollbar styling.
+Streamlining the internship application, evaluation, onboarding, and offer management process through an elegant student and administrator experience.
 
-### Admin Features
-- **Secure Admin Dashboard** (login-protected via custom HTTP-only cookies).
-- **View All Applications** with real-time student details, tracks, and resume download links.
-- **Approve Applications** with one click.
-- **Automated Offer Letter** HTML email notification generated and sent to the student upon approval.
-- **Application Status Tracking** (shows pending, approved, or accepted state).
-- **Download & Resend Offers**: Admins can download the generated offer letter as a beautiful standalone HTML file or manually trigger a resend email directly from the admin dashboard for any approved/accepted applicant.
+[Live Demo](#) • [Report Bug](#) • [Request Feature](#)
 
-### Technical Highlights
-- **Backend**: Pure Node.js built-in `http`, `fs`, `path`, and `querystring` modules (completely dependency-free, no Express or third-party frameworks).
-- **Database**: Persistent MySQL database storing `applications` and `newsletter_subscribers`. Queries are run safely using a custom child-process shell executor wrapper in `db.js`.
-- **Session Management**: Lightweight in-memory session store mapped to secure HTTP-only cookies (`sessionId`).
-- **File Upload**: Direct browser-to-server Base64 file parser (`FileReader` API) transferring resume data inside standard JSON POST requests, bypassing `multer` dependencies.
-- **Email Service**: Custom, dependency-free SMTP mailer (`mail.js`) built with Node's native `net` and `tls` socket modules. It supports STARTTLS handshakes, AUTH LOGIN credentials, and automatically saves a duplicate `.html` copy of all outgoing mails inside `sent_emails/` folder for visual confirmation.
-- **Theme System**: Persisted light/dark theme toggle leveraging CSS custom variables on `:root` and `.dark` blocks, and inline loading headers on static files.
+</div>
 
 ---
 
-## 🚀 Quick Start
+## 📖 Overview
 
-### Prerequisites
-- Node.js (v14+)
-- MySQL Server (default port: `3306`)
+TechNova Internship Portal is a comprehensive internship management platform designed to simplify the complete internship lifecycle—from student applications to onboarding and offer acceptance.
 
-### Database Setup
-Ensure your local MySQL service is running and configure the schema:
-1. Log in to your MySQL terminal and create tables:
-   ```sql
-   CREATE DATABASE IF NOT EXISTS technova_db;
-   USE technova_db;
+The platform combines a modern responsive landing page, application management system, administrator dashboard, resume processing, automated offer letter generation, email notifications, and internship progress tracking into a unified experience.
 
-   CREATE TABLE IF NOT EXISTS applications (
-     id VARCHAR(50) PRIMARY KEY,
-     fullName VARCHAR(100),
-     email VARCHAR(100),
-     message TEXT,
-     github VARCHAR(255),
-     linkedin VARCHAR(255),
-     leetcode VARCHAR(255),
-     domain VARCHAR(100),
-     resume VARCHAR(255),
-     status VARCHAR(20) DEFAULT 'pending',
-     tasks TEXT DEFAULT NULL,
-     createdAt VARCHAR(50),
-     approvedAt VARCHAR(50) DEFAULT NULL
-   );
+This project demonstrates advanced frontend development, backend engineering, database integration, session management, file handling, and email automation using pure Node.js and MySQL.
 
-   CREATE TABLE IF NOT EXISTS newsletter_subscribers (
-     id INT AUTO_INCREMENT PRIMARY KEY,
-     email VARCHAR(100) UNIQUE,
-     subscribedAt VARCHAR(50)
-   );
-   ```
+---
 
-### Configuration
-Create a `.env` file in the root of `TechNova_ResponsiveLandingPage/` directory:
-```env
-PORT=3000
-SESSION_SECRET=your_super_secret
+# ✨ Key Highlights
 
-# Admin Credentials
-ADMIN_EMAIL=admin@technova.com
-ADMIN_PASSWORD=Admin@123
+### 🎓 Student Experience
 
-# Database configuration
-DB_HOST=localhost
-DB_USER=root
-DB_PASS=Bhumi@2006
-DB_NAME=technova_db
+✔ Explore internship opportunities
 
-# Optional SMTP email settings
-SMTP_HOST=smtp.example.com
-SMTP_PORT=587
-SMTP_SECURE=false
-SMTP_USER=your_smtp_user
-SMTP_PASS=your_smtp_password
+✔ Submit internship applications
+
+✔ Upload resumes
+
+✔ Share GitHub, LinkedIn & LeetCode profiles
+
+✔ Track application status in real-time
+
+✔ Access onboarding instructions
+
+✔ Download official offer letters
+
+✔ Accept internship offers digitally
+
+---
+
+### 🏢 Administrator Experience
+
+✔ Secure admin authentication
+
+✔ Review candidate profiles
+
+✔ Download resumes
+
+✔ Approve applications
+
+✔ Generate internship offers
+
+✔ Send automated emails
+
+✔ Track candidate progress
+
+✔ Re-send offer letters when required
+
+---
+
+# 🌟 Features
+
+## 🎯 Modern Landing Page
+
+A visually appealing and fully responsive landing page designed to create a professional first impression.
+
+### Includes
+
+* Animated Hero Section
+* Typing Text Effect
+* Floating Internship Cards
+* Internship Domain Showcase
+* Learning Journey Timeline
+* Animated Statistics Counters
+* Testimonials Carousel
+* FAQ Accordion
+* Newsletter Subscription
+* Contact Form
+* Smooth Scrolling Navigation
+
+---
+
+## 💼 Internship Domains
+
+Students can explore various internship tracks:
+
+| Domain           | Description                         |
+| ---------------- | ----------------------------------- |
+| Web Development  | Frontend & Backend Development      |
+| Java Development | Core Java & Enterprise Applications |
+| AI / ML          | Machine Learning Fundamentals       |
+| Data Science     | Analytics & Data Processing         |
+| Cyber Security   | Security Fundamentals               |
+| UI/UX Design     | Design Thinking & User Experience   |
+
+---
+
+## 📝 Internship Application System
+
+Students can apply directly through the platform.
+
+### Application Details Collected
+
+* Full Name
+* Email Address
+* Internship Domain
+* GitHub Profile
+* LinkedIn Profile
+* LeetCode Profile
+* Resume Upload
+* Cover Message
+
+### Validation Features
+
+* Email Validation
+* Required Fields Validation
+* Resume Validation
+* URL Verification
+* Client-Side Error Handling
+
+---
+
+## 📂 Resume Management
+
+Applicants can upload their resumes directly during the application process.
+
+### Supported Features
+
+* PDF Resume Upload
+* Secure Storage
+* Resume Retrieval
+* Admin Download Access
+
+---
+
+## 📊 Application Tracking System
+
+Every application progresses through multiple stages.
+
+### Workflow
+
+```text
+Not Applied
+     ↓
+Pending Review
+     ↓
+Approved
+     ↓
+Accepted
 ```
 
-### Installation & Run
-
-1. **Navigate to the directory**
-   ```bash
-   cd TechNova_ResponsiveLandingPage
-   ```
-
-2. **Start the server** (runs using Node's standard executable)
-   ```bash
-   node server.js
-   ```
-   The portal is now running at `http://localhost:3000`.
+Students can monitor their status using the onboarding dashboard.
 
 ---
 
-## 📋 User Flow
+## 🎓 Student Dashboard
 
-### Student Application
-1. Visit `http://localhost:3000/login.html`
-2. Select "Applicant" role. Enter any email and password.
-3. Observe the sticky **Application Status Bar** displaying "None".
-4. Fill the application form with your details and upload a PDF resume.
-5. Submit the application. The status bar immediately transitions to **PENDING**.
+The onboarding dashboard provides:
 
-### Admin Review & Selection Email
-1. Visit `http://localhost:3000/login.html`
-2. Select "Admin" role. Login with `admin@technova.com` / `Admin@123`.
-3. View all applicant entries inside the dashboard.
-4. Click **Approve Application** on a student card.
-5. An offer letter email is generated and sent via SMTP to the student's email, and a backup `.html` file is saved to `/sent_emails/`.
+### Features
 
-### Student Acceptance
-1. Sign back in as the applicant.
-2. The status bar displays **APPROVED** with an active **View Offer & Tasks** button.
-3. Click the button to inspect the onboarding instructions, download the official offer letter for offline viewing, or trigger an email copy.
-4. Click **Accept Internship Offer** to accept the offer. The database status transitions to **ACCEPTED**.
+* Application Status Tracking
+* Internship Progress Updates
+* Assigned Tasks
+* Offer Letter Access
+* Internship Acceptance Workflow
+* Onboarding Guidance
 
 ---
 
-## 🎨 Design System & Highlights
-- **Dynamic Variable Theme Engine:** Cards, buttons, inputs, icons, and labels transition automatically on theme toggle.
-- **Forced Dark Footer:** Standardized dark footer theme ensuring high contrast and optimal legibility.
-- **Smooth Intersection Observers:** Triggers scroll reveal animations and stats counting efficiently without blocking the main event thread.
-- **Mobile Snapping Timeline:** Adapts timeline cards to a horizontal swipe container on mobile viewports.
+## 🏢 Admin Dashboard
+
+A dedicated administrator portal for managing applicants.
+
+### Administrative Controls
+
+#### Candidate Management
+
+* Review Applications
+* View Candidate Profiles
+* Download Resumes
+* Review GitHub Profiles
+* Review LinkedIn Profiles
+* Review LeetCode Profiles
+
+#### Application Actions
+
+* Approve Applications
+* Track Application Progress
+* Monitor Internship Domains
+* Manage Candidate Records
 
 ---
 
-## 📁 Project Structure
+## 📧 Automated Offer Letter System
 
-```
+Upon approval, the platform automatically generates a professional internship offer letter.
+
+### Student Capabilities
+
+* View Offer Letter
+* Download Offer Letter
+* Request Email Copy
+* Accept Offer
+
+### Administrator Capabilities
+
+* Generate Offer Letter
+* Download Offer Letter
+* Re-Send Offer Emails
+
+### Email System
+
+Custom SMTP implementation built entirely using Node.js native networking modules.
+
+---
+
+## 🌙 Dark Mode Support
+
+A complete light and dark theme system.
+
+### Features
+
+* One-Click Theme Switching
+* Theme Persistence
+* LocalStorage Integration
+* Smooth Transitions
+* Cross-Page Consistency
+
+---
+
+# 🎨 UI / UX Highlights
+
+### Premium Design System
+
+* Glassmorphism Components
+* Modern Gradients
+* Floating Elements
+* Responsive Layouts
+* Custom Scrollbar
+* Animated Buttons
+* Interactive Cards
+* Soft Shadows
+* Consistent Design Language
+
+### User Experience Enhancements
+
+* Sticky Navigation
+* Mobile Hamburger Menu
+* Back-To-Top Button
+* Scroll Reveal Animations
+* Smooth Page Transitions
+* Loading Effects
+
+---
+
+# 🛠 Technology Stack
+
+## Frontend
+
+* HTML5
+* CSS3
+* JavaScript (ES6)
+
+## Backend
+
+* Node.js
+* HTTP Module
+* FS Module
+* Path Module
+* Querystring Module
+
+## Database
+
+* MySQL
+
+## Authentication
+
+* Session-Based Authentication
+* HTTP-Only Cookies
+
+## Email Service
+
+* Native SMTP Client
+* Automated Email Generation
+
+---
+
+# 🧠 Concepts Demonstrated
+
+### Frontend Engineering
+
+* Responsive Web Design
+* DOM Manipulation
+* Form Validation
+* Event Handling
+* Local Storage
+* CSS Variables
+* Animations
+* Accessibility
+
+### Backend Engineering
+
+* API Development
+* Session Management
+* Authentication
+* File Handling
+* Resume Processing
+* Email Automation
+
+### Database Management
+
+* MySQL Integration
+* CRUD Operations
+* Data Persistence
+
+---
+
+# 📁 Project Structure
+
+```text
 TechNova_ResponsiveLandingPage/
-├── index.html              # Main landing page & applicant flow
-├── login.html              # Applicant/Admin login
-├── admin.html              # Admin review panel
-├── script.js               # Client-side validation, base64 loader, observers
-├── admin.js                # Admin card creation logic
-├── server.js               # Built-in Node http server, session engine, file saver
-├── db.js                   # MySQL child-process querying helper
-├── mail.js                 # Native socket SMTP mailer and email file logger
-├── styles.css              # Glassmorphic light/dark mode responsive stylesheet
-├── sent_emails/            # Generated offer letter email HTML files
-└── uploads/                # Resume PDF file storage
+│
+├── index.html
+├── login.html
+├── admin.html
+│
+├── styles.css
+├── script.js
+├── admin.js
+│
+├── server.js
+├── db.js
+├── mail.js
+│
+├── uploads/
+│   └── Applicant Resumes
+│
+├── sent_emails/
+│   └── Generated Offer Letters
+│
+└── README.md
 ```
+
+---
+
+# 📸 Screenshots
+
+After completing the project, create a folder:
+
+```text
+screenshots/
+```
+
+Add these screenshots:
+
+### 1. Homepage Hero Section
+
+File:
+
+```text
+screenshots/homepage.png
+```
+
+Capture:
+
+* Hero Banner
+* Typing Animation
+* CTA Buttons
+
+---
+
+### 2. Internship Domains Section
+
+File:
+
+```text
+screenshots/domains.png
+```
+
+Capture:
+
+* Internship Cards
+* Hover Effects
+
+---
+
+### 3. Student Application Form
+
+File:
+
+```text
+screenshots/application-form.png
+```
+
+Capture:
+
+* GitHub Field
+* LinkedIn Field
+* LeetCode Field
+* Resume Upload
+
+---
+
+### 4. Student Dashboard
+
+File:
+
+```text
+screenshots/student-dashboard.png
+```
+
+Capture:
+
+* Status Tracking
+* Tasks
+* Offer Access
+
+---
+
+### 5. Admin Dashboard
+
+File:
+
+```text
+screenshots/admin-dashboard.png
+```
+
+Capture:
+
+* Candidate List
+* Resume Download
+* Approval Actions
+
+---
+
+### 6. Offer Letter Preview
+
+File:
+
+```text
+screenshots/offer-letter.png
+```
+
+Capture:
+
+* Generated Offer Letter
+
+---
+
+### 7. Dark Mode
+
+File:
+
+```text
+screenshots/dark-mode.png
+```
+
+Capture:
+
+* Entire Page in Dark Theme
+
+---
+
+### 8. Mobile Responsive View
+
+File:
+
+```text
+screenshots/mobile-view.png
+```
+
+Capture:
+
+* Mobile Navigation
+* Responsive Layout
+
+---
+
+# 🚀 Future Enhancements
+
+* AI Resume Screening
+* Candidate Ranking System
+* Interview Scheduling
+* Certificate Generation
+* Analytics Dashboard
+* Multi-Admin Support
+* Role-Based Access Control
+* AI Internship Recommendations
+
+---
+
+# 👩‍💻 Author
+
+### Bhumi Singh
+
+B.Tech CSE (AI)
+
+Aspiring Software Engineer • Java Developer • Full Stack Developer
+
+---
+
+⭐ If you found this project interesting, consider giving it a star on GitHub.
