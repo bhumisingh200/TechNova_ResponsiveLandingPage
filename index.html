@@ -39,6 +39,17 @@
     </nav>
   </header>
 
+  <!-- Applicant Status Bar -->
+  <div class="status-bar" id="statusBar" style="display: none;">
+    <div class="container status-bar-content">
+      <span>Application Status: <strong id="statusLabel">None</strong></span>
+      <div class="status-actions">
+        <button class="btn-sm btn-secondary" id="viewOfferBtn" style="display: none;">View Offer &amp; Tasks</button>
+        <a class="btn-sm btn-secondary" href="/logout">Sign Out</a>
+      </div>
+    </div>
+  </div>
+
   <main>
     <section class="hero section" id="home">
       <div class="hero-grid container">
@@ -152,7 +163,7 @@
         </div>
         <div class="domain-grid">
           <article class="domain-card reveal">
-            <div class="domain-icon"></div>
+            <div class="domain-icon">💻</div>
             <h3>Web Development</h3>
             <p>Build responsive sites, React apps, and modern web experiences.</p>
           </article>
@@ -280,7 +291,7 @@
               <h3>Portfolio Website</h3>
               <p>Responsive personal portfolio built with HTML, CSS, and JavaScript.</p>
               <p class="project-stack">Stack: HTML • CSS • JS</p>
-              <a href="#contact" class="project-btn">View Details</a>
+              <button class="project-btn" data-project="portfolio">View Details</button>
             </div>
           </article>
           <article class="project-card reveal">
@@ -289,7 +300,7 @@
               <h3>Calculator App</h3>
               <p>Interactive calculator with clean UI and smooth input animation.</p>
               <p class="project-stack">Stack: JS • UI Design</p>
-              <a href="#contact" class="project-btn">View Details</a>
+              <button class="project-btn" data-project="calculator">View Details</button>
             </div>
           </article>
           <article class="project-card reveal">
@@ -298,7 +309,7 @@
               <h3>Image Gallery</h3>
               <p>Dynamic media gallery with filters, hover states, and lightbox style styling.</p>
               <p class="project-stack">Stack: CSS • JS</p>
-              <a href="#contact" class="project-btn">View Details</a>
+              <button class="project-btn" data-project="gallery">View Details</button>
             </div>
           </article>
           <article class="project-card reveal">
@@ -307,7 +318,7 @@
               <h3>To-Do Application</h3>
               <p>Task manager with persistence, interactive controls, and neat design.</p>
               <p class="project-stack">Stack: JS • Local Storage</p>
-              <a href="#contact" class="project-btn">View Details</a>
+              <button class="project-btn" data-project="todo">View Details</button>
             </div>
           </article>
           <article class="project-card reveal">
@@ -316,7 +327,7 @@
               <h3>Quiz Application</h3>
               <p>Gamified knowledge check with scoring, pacing, and animations.</p>
               <p class="project-stack">Stack: JS • UX</p>
-              <a href="#contact" class="project-btn">View Details</a>
+              <button class="project-btn" data-project="quiz">View Details</button>
             </div>
           </article>
           <article class="project-card reveal">
@@ -325,7 +336,7 @@
               <h3>Weather Dashboard</h3>
               <p>Weather search tool with forecasts and polished UI interactions.</p>
               <p class="project-stack">Stack: API • JS</p>
-              <a href="#contact" class="project-btn">View Details</a>
+              <button class="project-btn" data-project="weather">View Details</button>
             </div>
           </article>
         </div>
@@ -372,6 +383,11 @@
             <p>"I appreciated the clear goals, milestone reviews, and the real-world security tasks that boosted my profile."</p>
             <div class="stars">★★★★★</div>
           </article>
+        </div>
+        <div class="testimonial-controls">
+          <button class="testimonial-btn prev-btn" id="prevTestimonial" aria-label="Previous testimonial">←</button>
+          <div class="testimonial-dots" id="testimonialDots"></div>
+          <button class="testimonial-btn next-btn" id="nextTestimonial" aria-label="Next testimonial">→</button>
         </div>
       </div>
     </section>
@@ -545,6 +561,70 @@
       <p>© 2026 Technova. Designed for modern internship journeys.</p>
     </div>
   </footer>
+
+  <!-- Project Details Modal -->
+  <div class="modal-overlay" id="projectModal" aria-hidden="true" role="dialog">
+    <div class="modal-container">
+      <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-badge" id="modalBadge">Web Development</span>
+          <h2 id="modalTitle">Portfolio Website</h2>
+        </div>
+        <div class="modal-body">
+          <div class="modal-visual" id="modalVisual"></div>
+          <div class="modal-info">
+            <h3>Overview</h3>
+            <p id="modalDescription">Detailed project description goes here...</p>
+            <h3>Key Features</h3>
+            <ul id="modalFeatures">
+              <li>Responsive design</li>
+              <li>Modern animations</li>
+            </ul>
+            <div class="modal-meta">
+              <div class="meta-item">
+                <strong>Stack:</strong>
+                <span id="modalStack">HTML, CSS, JS</span>
+              </div>
+              <div class="meta-item">
+                <strong>Duration:</strong>
+                <span id="modalDuration">1 Week</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="modalApplyBtn">Apply to Build this Project</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offer Details Modal -->
+  <div class="modal-overlay" id="offerModal" aria-hidden="true" role="dialog">
+    <div class="modal-container">
+      <button class="modal-close" id="offerModalClose" aria-label="Close modal">&times;</button>
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-badge">Official Offer</span>
+          <h2>Internship Offer &amp; Tasks</h2>
+        </div>
+        <div class="modal-body">
+          <div class="offer-letter-box">
+            <p><strong>Dear Student,</strong></p>
+            <p>Congratulations! We are pleased to extend an offer for a remote internship at Technova in the <strong id="offerDomain">Domain</strong> track.</p>
+            <p>As an intern, you will build portfolio projects, collaborate with industry mentors, and complete milestone tasks. Your performance will be graded, culminating in a Certificate of Completion.</p>
+            <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.1rem; color: var(--text);">Your Assigned Onboarding Tasks:</h3>
+            <div class="offer-tasks-box" id="offerTasks" style="background: var(--surface-soft); padding: 1.25rem; border-radius: 18px; border: 1px solid var(--border); color: var(--muted); line-height: 1.7;">Tasks loading...</div>
+            <p style="margin-top: 1.5rem;">Please accept this offer to activate your portal and unlock your submission tools.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="acceptOfferBtn">Accept Internship Offer</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

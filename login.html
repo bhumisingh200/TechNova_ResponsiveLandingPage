@@ -7,6 +7,15 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="login-page">
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('technova-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+        document.body.classList.add('dark');
+      }
+    })();
+  </script>
   <main class="section login-section">
     <div class="container login-card">
       <div class="login-hero">

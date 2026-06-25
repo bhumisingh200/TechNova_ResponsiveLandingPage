@@ -7,6 +7,15 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="admin-page">
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('technova-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+        document.body.classList.add('dark');
+      }
+    })();
+  </script>
   <header class="topbar admin-topbar">
     <div class="container navbar">
       <a href="/admin" class="brand">Technova Admin</a>
