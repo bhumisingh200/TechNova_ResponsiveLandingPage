@@ -9,6 +9,10 @@
 <body class="login-page">
   <script>
     (function() {
+      if (window.location.port === '5500') {
+        window.location.href = window.location.href.replace(':5500', ':3000');
+        return;
+      }
       const storedTheme = localStorage.getItem('technova-theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {

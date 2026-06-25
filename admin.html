@@ -9,6 +9,10 @@
 <body class="admin-page">
   <script>
     (function() {
+      if (window.location.port === '5500') {
+        window.location.href = window.location.href.replace(':5500', ':3000');
+        return;
+      }
       const storedTheme = localStorage.getItem('technova-theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
@@ -32,6 +36,9 @@
         <h2>Review applicant submissions and approve offers.</h2>
         <p>Applications are stored securely and can be approved with a single click. Offer emails are generated automatically.</p>
       </div>
+      <!-- Admin Stats Grid -->
+      <div class="admin-stats-grid" id="adminStats"></div>
+
       <div class="admin-panel" id="adminPanel">
         <p class="loading-text">Loading applications...</p>
       </div>

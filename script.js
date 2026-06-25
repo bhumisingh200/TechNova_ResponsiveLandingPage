@@ -616,6 +616,8 @@ function initOfferModal() {
   const offerDomain = document.getElementById('offerDomain');
   const offerTasks = document.getElementById('offerTasks');
   const acceptOfferBtn = document.getElementById('acceptOfferBtn');
+  const downloadOfferBtn = document.getElementById('downloadOfferBtn');
+  const emailOfferBtn = document.getElementById('emailOfferBtn');
 
   if (!offerModal || !viewOfferBtn) return;
 
@@ -689,6 +691,43 @@ function initOfferModal() {
         alert('Network error. Please try again later.');
       });
   });
+
+  if (downloadOfferBtn) {
+    downloadOfferBtn.addEventListener('click', () => {
+      window.location.href = '/api/applications/download-offer';
+    });
+  }
+
+  if (emailOfferBtn) {
+    emailOfferBtn.addEventListener('click', () => {
+      emailOfferBtn.disabled = true;
+      const originalText = emailOfferBtn.innerHTML;
+      emailOfferBtn.innerHTML = '✉️ Sending...';
+
+      fetch('/api/applications/email-offer', {
+        method: 'POST'
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            emailOfferBtn.innerHTML = '✉️ Email Sent! ✓';
+            setTimeout(() => {
+              emailOfferBtn.disabled = false;
+              emailOfferBtn.innerHTML = originalText;
+            }, 3000);
+          } else {
+            emailOfferBtn.disabled = false;
+            emailOfferBtn.innerHTML = originalText;
+            alert(data.message || 'Failed to email offer letter.');
+          }
+        })
+        .catch(() => {
+          emailOfferBtn.disabled = false;
+          emailOfferBtn.innerHTML = originalText;
+          alert('Network error. Please try again later.');
+        });
+    });
+  }
 }
 
 function init() {

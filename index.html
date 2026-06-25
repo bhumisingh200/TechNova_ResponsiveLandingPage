@@ -9,6 +9,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script>
+    if (window.location.port === '5500') {
+      window.location.href = window.location.href.replace(':5500', ':3000');
+    }
+  </script>
 </head>
 <body>
   <div class="loader" id="loader">
@@ -37,18 +42,18 @@
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">☾</button>
       </div>
     </nav>
-  </header>
 
-  <!-- Applicant Status Bar -->
-  <div class="status-bar" id="statusBar" style="display: none;">
-    <div class="container status-bar-content">
-      <span>Application Status: <strong id="statusLabel">None</strong></span>
-      <div class="status-actions">
-        <button class="btn-sm btn-secondary" id="viewOfferBtn" style="display: none;">View Offer &amp; Tasks</button>
-        <a class="btn-sm btn-secondary" href="/logout">Sign Out</a>
+    <!-- Applicant Status Bar -->
+    <div class="status-bar" id="statusBar" style="display: none;">
+      <div class="container status-bar-content">
+        <span>Application Status: <strong id="statusLabel">None</strong></span>
+        <div class="status-actions">
+          <button class="btn-sm btn-secondary" id="viewOfferBtn" style="display: none;">View Offer &amp; Tasks</button>
+          <a class="btn-sm btn-secondary" href="/logout">Sign Out</a>
+        </div>
       </div>
     </div>
-  </div>
+  </header>
 
   <main>
     <section class="hero section" id="home">
@@ -609,7 +614,7 @@
           <span class="modal-badge">Official Offer</span>
           <h2>Internship Offer &amp; Tasks</h2>
         </div>
-        <div class="modal-body">
+        <div class="modal-body offer-modal-body">
           <div class="offer-letter-box">
             <p><strong>Dear Student,</strong></p>
             <p>Congratulations! We are pleased to extend an offer for a remote internship at Technova in the <strong id="offerDomain">Domain</strong> track.</p>
@@ -617,6 +622,14 @@
             <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.1rem; color: var(--text);">Your Assigned Onboarding Tasks:</h3>
             <div class="offer-tasks-box" id="offerTasks" style="background: var(--surface-soft); padding: 1.25rem; border-radius: 18px; border: 1px solid var(--border); color: var(--muted); line-height: 1.7;">Tasks loading...</div>
             <p style="margin-top: 1.5rem;">Please accept this offer to activate your portal and unlock your submission tools.</p>
+            <div class="offer-actions-row" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+              <button class="btn btn-secondary" id="downloadOfferBtn" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                📥 Download Offer Letter
+              </button>
+              <button class="btn btn-secondary" id="emailOfferBtn" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                ✉️ Email Offer Letter
+              </button>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
