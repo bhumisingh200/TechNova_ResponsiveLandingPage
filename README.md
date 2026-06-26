@@ -202,43 +202,49 @@ Student Accepts Offer
 
 # 📸 Screenshots
 
-Create a folder named:
-
-```text
-screenshots/
-```
-
-Include these images:
-
-| Screenshot          | File Name              |
-| ------------------- | ---------------------- |
-| Homepage            | homepage.png           |
-| Internship Programs | internship-domains.png |
-| Learning Journey    | learning-journey.png   |
-| Student Login       | student-login.png      |
-| Application Form    | application-form.png   |
-| Student Dashboard   | student-dashboard.png  |
-| Admin Dashboard     | admin-dashboard.png    |
-| Candidate Approval  | candidate-approval.png |
-| Offer Letter        | offer-letter.png       |
-| Email Preview       | email-preview.png      |
-| Dark Mode           | dark-mode.png          |
-| Mobile View         | mobile-view.png        |
-
-Example:
-
-```md
 ## Homepage
 
 ![Homepage](screenshots/homepage.png)
 
-## Student Dashboard
+## Internship Programs
 
-![Dashboard](screenshots/student-dashboard.png)
+![Programs](screenshots/internship-domains.png)
+
+## Learning Journey
+
+![Journey](screenshots/learning-journey.png)
+
+## Student Login 
+
+![Applicant Login](screenshots/student-login.png)
+
+## Application Form
+
+![Application Form](screenshots/application-form.png)
 
 ## Admin Dashboard
 
 ![Admin](screenshots/admin-dashboard.png)
+
+## Candidate Approval
+
+![Approval](screenshots/candidate-approval.png)
+
+## Offer Letter 
+
+![Offer Letter](screenshots/offer-letter.png)
+
+## Email Preview
+
+![Email](sreenshots/email-preview.png)
+
+## Light MOde
+
+![Light Mode](sreenshots/light-mode.png)
+
+## Mobile View
+
+![Mobile View](sreenshots/mobile-view.png)
 ```
 
 ---
