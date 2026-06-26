@@ -329,26 +329,77 @@ A complete light and dark theme system.
 ```text
 TechNova_ResponsiveLandingPage/
 │
-├── index.html
-├── login.html
-├── admin.html
+├── index.html       # Unified SPA (Landing page, Student Dashboard, Admin Panel)
+├── styles.css       # Premium responsive layout styles (Glassmorphism, 3D tilt, dark/light variables)
+├── script.js        # Core client-side interactions, form validation, 3D tilt, administrative AJAX handlers
 │
-├── styles.css
-├── script.js
-├── admin.js
+├── server.js        # Node.js backend server handling sessions, auth routes, and API logic
+├── db.js            # Database wrapper executing native MySQL queries via execSync
+├── mail.js          # Native SMTP email implementation for dispatching offer letters
 │
-├── server.js
-├── db.js
-├── mail.js
-│
-├── uploads/
-│   └── Applicant Resumes
-│
-├── sent_emails/
-│   └── Generated Offer Letters
-│
-└── README.md
+├── uploads/         # Directory for storing submitted candidate PDF resumes
+├── .env.example     # Template for environment variables config
+└── README.md        # Comprehensive documentation
 ```
+
+---
+
+# 🚀 Getting Started
+
+Follow these instructions to set up and run the project locally.
+
+### Prerequisites
+
+1. **Node.js**: Install Node.js (v14 or higher).
+2. **MySQL Server**: Install MySQL Server. Ensure `mysql` or `mysql.exe` is configured in your system environment path or matches the configuration in `db.js`.
+   - Default MySQL executable path: `C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe`
+   - Default Database name: `technova_db`
+   - Default Root User: `root`
+   - Default Password: `Bhumi@2006`
+
+### Database Setup
+
+Run the following SQL queries in your MySQL console to initialize the database schema:
+
+```sql
+CREATE DATABASE IF NOT EXISTS technova_db;
+USE technova_db;
+
+CREATE TABLE IF NOT EXISTS applications (
+  id VARCHAR(255) PRIMARY KEY,
+  fullName VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  message TEXT,
+  github VARCHAR(255) NOT NULL,
+  linkedin VARCHAR(255) NOT NULL,
+  leetcode VARCHAR(255) NOT NULL,
+  domain VARCHAR(100) NOT NULL,
+  resume VARCHAR(255) NOT NULL,
+  status VARCHAR(50) DEFAULT 'pending',
+  createdAt VARCHAR(255) NOT NULL
+);
+```
+
+### Installation & Run
+
+1. Clone or copy this repository to your local system.
+2. Navigate to the project directory:
+   ```bash
+   cd TechNova_ResponsiveLandingPage
+   ```
+3. Create a `.env` file in the root directory by copying `.env.example`:
+   ```bash
+   cp .env.example .env
+   ```
+4. Update the port, session secret, and optional SMTP settings inside the `.env` file as needed.
+5. Start the Node.js server:
+   ```bash
+   node server.js
+   ```
+6. Open your web browser and navigate to:
+   ```text
+   http://localhost:3000/
+   ```
 
 ---
 

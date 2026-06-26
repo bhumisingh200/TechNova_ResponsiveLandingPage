@@ -16,6 +16,9 @@
   </script>
 </head>
 <body>
+  <!-- Decorative Glow Orbs for 3D visual depth -->
+  <div class="glow-orb orb-1" id="orb1"></div>
+  <div class="glow-orb orb-2" id="orb2"></div>
   <div class="loader" id="loader">
     <div class="loader-ring"></div>
     <p>Launching Technova...</p>
@@ -40,6 +43,8 @@
       </div>
       <div class="nav-actions">
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">☾</button>
+        <button class="btn btn-secondary" id="signInBtn">Portal Sign In</button>
+        <a class="btn btn-secondary" id="signOutBtn" href="/logout" style="display: none;">Sign Out</a>
       </div>
     </nav>
 
@@ -55,7 +60,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="landingPageMain">
     <section class="hero section" id="home">
       <div class="hero-grid container">
         <div class="hero-copy">
@@ -86,21 +91,25 @@
           </div>
         </div>
         <div class="hero-visual">
-          <div class="hero-illustration" aria-hidden="true">
-            <div class="floating-card card-a">
-              <div>
-                <span>Mentor Chat</span>
-                <p>Live feedback and career guidance.</p>
+          <div class="hero-illustration tilt-3d" id="heroIllustration" aria-hidden="true">
+            <div class="float-wrapper card-a">
+              <div class="floating-card tilt-card" style="transform: translateZ(50px);">
+                <div class="floating-card-body">
+                  <span>Mentor Chat</span>
+                  <p>Live feedback and career guidance.</p>
+                </div>
               </div>
             </div>
-            <div class="floating-card card-b">
-              <div>
-                <span>Project Brief</span>
-                <p>Build polished apps for your portfolio.</p>
+            <div class="float-wrapper card-b">
+              <div class="floating-card tilt-card" style="transform: translateZ(80px);">
+                <div class="floating-card-body">
+                  <span>Project Brief</span>
+                  <p>Build polished apps for your portfolio.</p>
+                </div>
               </div>
             </div>
-            <div class="hero-circle"></div>
-            <div class="hero-chart"></div>
+            <div class="hero-circle" style="transform: translateZ(30px);"></div>
+            <div class="hero-chart" style="transform: translateZ(20px);"></div>
           </div>
         </div>
       </div>
@@ -114,17 +123,17 @@
           <p>Join a premium internship experience that blends structured learning, hands-on projects, and mentor support to fast-track your tech career.</p>
         </div>
         <div class="about-cards">
-          <article class="glass-card reveal">
+          <article class="glass-card reveal tilt-card">
             <div class="icon">🚀</div>
             <h3>Fast-paced training</h3>
             <p>Intensive modules built to keep momentum and learning gain high.</p>
           </article>
-          <article class="glass-card reveal">
+          <article class="glass-card reveal tilt-card">
             <div class="icon">💡</div>
             <h3>Career ready skills</h3>
             <p>Attend workshops, mock interviews, and soft skill sessions.</p>
           </article>
-          <article class="glass-card reveal">
+          <article class="glass-card reveal tilt-card">
             <div class="icon">📁</div>
             <h3>Portfolio projects</h3>
             <p>Launch real-world applications that impress hiring teams.</p>
@@ -167,32 +176,32 @@
           <h2>Choose the technology pathway that fits your goals.</h2>
         </div>
         <div class="domain-grid">
-          <article class="domain-card reveal">
+          <article class="domain-card reveal tilt-card">
             <div class="domain-icon">💻</div>
             <h3>Web Development</h3>
             <p>Build responsive sites, React apps, and modern web experiences.</p>
           </article>
-          <article class="domain-card reveal">
+          <article class="domain-card reveal tilt-card">
             <div class="domain-icon">☕</div>
             <h3>Java Development</h3>
             <p>Master object-oriented design, backend APIs, and enterprise tooling.</p>
           </article>
-          <article class="domain-card reveal">
+          <article class="domain-card reveal tilt-card">
             <div class="domain-icon">🤖</div>
             <h3>AI &amp; Machine Learning</h3>
             <p>Train models, process data, and deploy intelligent systems.</p>
           </article>
-          <article class="domain-card reveal">
+          <article class="domain-card reveal tilt-card">
             <div class="domain-icon">📊</div>
             <h3>Data Science</h3>
             <p>Analyze datasets, build pipelines, and visualize insights.</p>
           </article>
-          <article class="domain-card reveal">
+          <article class="domain-card reveal tilt-card">
             <div class="domain-icon">🔒</div>
             <h3>Cyber Security</h3>
             <p>Learn defense techniques, risk assessment, and secure architectures.</p>
           </article>
-          <article class="domain-card reveal">
+          <article class="domain-card reveal tilt-card">
             <div class="domain-icon">🎨</div>
             <h3>UI/UX Design</h3>
             <p>Create polished interfaces and memorable product experiences.</p>
@@ -290,7 +299,7 @@
           <h2>Showcase internship work that stands out.</h2>
         </div>
         <div class="projects-grid">
-          <article class="project-card reveal">
+          <article class="project-card reveal tilt-card">
             <div class="project-image image-1"></div>
             <div class="project-content">
               <h3>Portfolio Website</h3>
@@ -299,7 +308,7 @@
               <button class="project-btn" data-project="portfolio">View Details</button>
             </div>
           </article>
-          <article class="project-card reveal">
+          <article class="project-card reveal tilt-card">
             <div class="project-image image-2"></div>
             <div class="project-content">
               <h3>Calculator App</h3>
@@ -308,7 +317,7 @@
               <button class="project-btn" data-project="calculator">View Details</button>
             </div>
           </article>
-          <article class="project-card reveal">
+          <article class="project-card reveal tilt-card">
             <div class="project-image image-3"></div>
             <div class="project-content">
               <h3>Image Gallery</h3>
@@ -317,7 +326,7 @@
               <button class="project-btn" data-project="gallery">View Details</button>
             </div>
           </article>
-          <article class="project-card reveal">
+          <article class="project-card reveal tilt-card">
             <div class="project-image image-4"></div>
             <div class="project-content">
               <h3>To-Do Application</h3>
@@ -326,7 +335,7 @@
               <button class="project-btn" data-project="todo">View Details</button>
             </div>
           </article>
-          <article class="project-card reveal">
+          <article class="project-card reveal tilt-card">
             <div class="project-image image-5"></div>
             <div class="project-content">
               <h3>Quiz Application</h3>
@@ -335,7 +344,7 @@
               <button class="project-btn" data-project="quiz">View Details</button>
             </div>
           </article>
-          <article class="project-card reveal">
+          <article class="project-card reveal tilt-card">
             <div class="project-image image-6"></div>
             <div class="project-content">
               <h3>Weather Dashboard</h3>
@@ -533,6 +542,23 @@
     </section>
   </main>
 
+  <!-- Admin Dashboard Section -->
+  <main id="adminDashboard" class="section admin-section" style="display: none;">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">Admin Portal</span>
+        <h2>Review applicant submissions and approve offers.</h2>
+        <p>Applications are stored securely and can be approved with a single click. Offer emails are generated automatically.</p>
+      </div>
+      <!-- Admin Stats Grid -->
+      <div class="admin-stats-grid" id="adminStats"></div>
+
+      <div class="admin-panel" id="adminPanel">
+        <p class="loading-text">Loading applications...</p>
+      </div>
+    </div>
+  </main>
+
   <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
   <footer class="footer section">
@@ -634,6 +660,42 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-primary" id="acceptOfferBtn">Accept Internship Offer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal-overlay" id="loginModal" aria-hidden="true" role="dialog">
+    <div class="modal-container login-modal-container tilt-card">
+      <button class="modal-close" id="loginModalClose" aria-label="Close modal">&times;</button>
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-badge">Access Portal</span>
+          <h2>Sign In</h2>
+        </div>
+        <div class="modal-body">
+          <form class="login-form" id="loginForm" novalidate>
+            <div class="input-group login-role-group" style="margin-bottom: 1rem;">
+              <label><input type="radio" name="role" value="applicant" checked /> Applicant</label>
+              <label><input type="radio" name="role" value="admin" /> Admin</label>
+            </div>
+            <div class="input-group">
+              <label for="loginEmail">Email</label>
+              <input id="loginEmail" name="email" type="email" placeholder="you@domain.com" required />
+              <span class="error-message" id="loginEmailError"></span>
+            </div>
+            <div class="input-group" style="margin-top: 0.5rem;">
+              <label for="loginPassword">Password</label>
+              <input id="loginPassword" name="password" type="password" placeholder="Enter password" required />
+              <span class="error-message" id="loginPasswordError"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;">Continue</button>
+            <p class="login-tip" style="margin-top: 1.25rem; font-size: 0.85rem; color: var(--muted); text-align: center;">
+              Admin credentials: admin@technova.com / Admin@123
+            </p>
+            <p class="form-message" id="loginFormMessage" style="text-align: center; margin-top: 0.75rem; font-weight: 500;"></p>
+          </form>
         </div>
       </div>
     </div>

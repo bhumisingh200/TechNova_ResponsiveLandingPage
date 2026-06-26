@@ -17,7 +17,7 @@ const revealElements = document.querySelectorAll('.reveal, .reveal-on-scroll');
 
 let mouseX = 0;
 let mouseY = 0;
-const floatingCards = document.querySelectorAll('.floating-card');
+const floatingCards = document.querySelectorAll('.float-wrapper');
 
 const domains = [
   'Web Development',
@@ -480,7 +480,7 @@ function handleContactValidation(event) {
           formMessage.textContent = result.message;
           formMessage.style.color = '#34d399';
           contactForm.reset();
-          checkApplicantStatus();
+          checkAuthStatus();
         } else {
           formMessage.textContent = result.message || 'Unable to submit application.';
           formMessage.style.color = '#f87171';
@@ -550,6 +550,15 @@ function handleMouseMove(event) {
     const moveY = (mouseY - 0.5) * 30 * (index % 2 === 0 ? 1 : -1);
     card.style.transform = `translate(${moveX}px, ${moveY}px)`;
   });
+
+  const orb1 = document.getElementById('orb1');
+  const orb2 = document.getElementById('orb2');
+  if (orb1) {
+    orb1.style.transform = `translate(${(mouseX - 0.5) * 45}px, ${(mouseY - 0.5) * 45}px)`;
+  }
+  if (orb2) {
+    orb2.style.transform = `translate(${(mouseX - 0.5) * -60}px, ${(mouseY - 0.5) * -60}px)`;
+  }
 }
 
 function initLoader() {
@@ -579,35 +588,446 @@ function initEventListeners() {
 
 let currentApplication = null;
 
-function checkApplicantStatus() {
+// ==========================================
+// AUTHENTICATION & PORTAL FLOW
+// ==========================================
+
+function checkAuthStatus() {
   const statusBar = document.getElementById('statusBar');
   const statusLabel = document.getElementById('statusLabel');
   const viewOfferBtn = document.getElementById('viewOfferBtn');
-  
-  if (!statusBar || !statusLabel) return;
-  
+  const signInBtn = document.getElementById('signInBtn');
+  const signOutBtn = document.getElementById('signOutBtn');
+  const navLinksContainer = document.getElementById('navLinks');
+  const landingPageMain = document.getElementById('landingPageMain');
+  const adminDashboard = document.getElementById('adminDashboard');
+  const footerElement = document.querySelector('.footer');
+
   fetch('/api/status')
     .then(res => res.json())
     .then(data => {
-      if (data.success) {
-        statusBar.style.display = 'block';
-        const status = data.status || 'none';
-        
-        statusLabel.textContent = status;
-        statusLabel.className = '';
-        statusLabel.classList.add(status);
-        
-        if (status === 'approved' || status === 'accepted') {
-          currentApplication = data.application;
-          viewOfferBtn.style.display = 'inline-block';
-          viewOfferBtn.textContent = status === 'accepted' ? 'View Onboarding Tasks' : 'View Offer & Tasks';
+      if (data.success && data.loggedIn) {
+        // Logged in states
+        if (signInBtn) signInBtn.style.display = 'none';
+        if (signOutBtn) signOutBtn.style.display = 'inline-flex';
+
+        if (data.role === 'admin') {
+          // ADMIN view
+          if (statusBar) statusBar.style.display = 'none';
+          if (landingPageMain) landingPageMain.style.display = 'none';
+          if (footerElement) footerElement.style.display = 'none';
+          if (navLinksContainer) navLinksContainer.style.display = 'none';
+          if (adminDashboard) adminDashboard.style.display = 'block';
+          
+          document.body.classList.add('admin-page');
+          loadApplications();
         } else {
-          viewOfferBtn.style.display = 'none';
+          // APPLICANT view
+          if (adminDashboard) adminDashboard.style.display = 'none';
+          if (landingPageMain) landingPageMain.style.display = 'block';
+          if (footerElement) footerElement.style.display = 'block';
+          if (navLinksContainer) navLinksContainer.style.display = 'flex';
+          
+          document.body.classList.remove('admin-page');
+
+          const status = data.status || 'none';
+          if (statusBar && statusLabel) {
+            statusBar.style.display = 'block';
+            statusLabel.textContent = status;
+            statusLabel.className = '';
+            statusLabel.classList.add(status);
+          }
+
+          if (status === 'approved' || status === 'accepted') {
+            currentApplication = data.application;
+            if (viewOfferBtn) {
+              viewOfferBtn.style.display = 'inline-block';
+              viewOfferBtn.textContent = status === 'accepted' ? 'View Onboarding Tasks' : 'View Offer & Tasks';
+            }
+          } else {
+            if (viewOfferBtn) viewOfferBtn.style.display = 'none';
+          }
         }
+      } else {
+        // GUEST (Not logged in) state
+        if (signInBtn) signInBtn.style.display = 'inline-flex';
+        if (signOutBtn) signOutBtn.style.display = 'none';
+        if (statusBar) statusBar.style.display = 'none';
+        if (adminDashboard) adminDashboard.style.display = 'none';
+        if (landingPageMain) landingPageMain.style.display = 'block';
+        if (footerElement) footerElement.style.display = 'block';
+        if (navLinksContainer) navLinksContainer.style.display = 'flex';
+
+        document.body.classList.remove('admin-page');
+        currentApplication = null;
       }
     })
-    .catch(err => console.error('Error fetching status:', err));
+    .catch(err => console.error('Error fetching auth status:', err));
 }
+
+// ==========================================
+// LOGIN MODAL LOGIC
+// ==========================================
+
+function initLoginModal() {
+  const loginModal = document.getElementById('loginModal');
+  const signInBtn = document.getElementById('signInBtn');
+  const loginModalClose = document.getElementById('loginModalClose');
+  const loginForm = document.getElementById('loginForm');
+  const loginFormMessage = document.getElementById('loginFormMessage');
+
+  if (!loginModal) return;
+
+  function openLoginModal() {
+    loginModal.classList.add('open');
+    loginModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLoginModal() {
+    loginModal.classList.remove('open');
+    loginModal.setAttribute('aria-hidden', 'true');
+    document.body.style.removeProperty('overflow');
+    loginForm.reset();
+    loginFormMessage.textContent = '';
+  }
+
+  if (signInBtn) {
+    signInBtn.addEventListener('click', openLoginModal);
+  }
+
+  if (loginModalClose) {
+    loginModalClose.addEventListener('click', closeLoginModal);
+  }
+
+  loginModal.addEventListener('click', (e) => {
+    if (e.target === loginModal) {
+      closeLoginModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && loginModal.classList.contains('open')) {
+      closeLoginModal();
+    }
+  });
+
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const role = loginForm.elements.role.value;
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      const emailError = document.getElementById('loginEmailError');
+      const passwordError = document.getElementById('loginPasswordError');
+
+      let valid = true;
+      if (!email) {
+        emailError.textContent = 'Email is required.';
+        valid = false;
+      } else {
+        emailError.textContent = '';
+      }
+
+      if (!password) {
+        passwordError.textContent = 'Password is required.';
+        valid = false;
+      } else {
+        passwordError.textContent = '';
+      }
+
+      if (!valid) return;
+
+      loginFormMessage.textContent = 'Signing in...';
+      loginFormMessage.style.color = 'var(--primary)';
+
+      fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ role, email, password })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            loginFormMessage.textContent = 'Sign in successful! Loading...';
+            loginFormMessage.style.color = '#34d399';
+            setTimeout(() => {
+              closeLoginModal();
+              checkAuthStatus();
+            }, 1000);
+          } else {
+            loginFormMessage.textContent = data.message || 'Invalid credentials.';
+            loginFormMessage.style.color = '#f87171';
+          }
+        })
+        .catch(() => {
+          loginFormMessage.textContent = 'Network error. Please try again.';
+          loginFormMessage.style.color = '#f87171';
+        });
+    });
+  }
+
+  // Pre-open if query parameter showLogin=admin is passed
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('showLogin') === 'admin') {
+    const adminRadio = document.querySelector('input[name="role"][value="admin"]');
+    if (adminRadio) adminRadio.checked = true;
+    openLoginModal();
+  }
+}
+
+// ==========================================
+// 3D TILT EFFECT LOGIC
+// ==========================================
+
+function init3DTilt() {
+  const tiltElements = document.querySelectorAll('.tilt-card, .tilt-3d');
+
+  tiltElements.forEach(element => {
+    let requestRef = null;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let isHovered = false;
+
+    const isHero = element.classList.contains('tilt-3d');
+    const maxTilt = isHero ? 8 : 12;
+
+    function updateTilt() {
+      const lerpFactor = 0.08; // slightly slower for premium feel
+      
+      currentX += (targetX - currentX) * lerpFactor;
+      currentY += (targetY - currentY) * lerpFactor;
+
+      element.style.transform = `perspective(1000px) rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg)`;
+
+      if (!isHovered && Math.abs(currentX) < 0.01 && Math.abs(currentY) < 0.01) {
+        currentX = 0;
+        currentY = 0;
+        element.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+        element.style.transition = '';
+        requestRef = null;
+      } else {
+        requestRef = requestAnimationFrame(updateTilt);
+      }
+    }
+
+    element.addEventListener('mouseenter', () => {
+      isHovered = true;
+      element.style.transition = 'none';
+      if (!requestRef) {
+        requestRef = requestAnimationFrame(updateTilt);
+      }
+    });
+
+    element.addEventListener('mousemove', (e) => {
+      const rect = element.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      targetX = ((centerY - y) / centerY) * maxTilt;
+      targetY = ((x - centerX) / centerX) * maxTilt;
+    });
+
+    element.addEventListener('mouseleave', () => {
+      isHovered = false;
+      targetX = 0;
+      targetY = 0;
+    });
+  });
+}
+
+// ==========================================
+// ADMIN DASHBOARD LOGIC
+// ==========================================
+
+function getDomainEmoji(domain) {
+  const d = (domain || '').toLowerCase();
+  if (d.includes('web')) return '🌐';
+  if (d.includes('java')) return '☕';
+  if (d.includes('ai') || d.includes('machine')) return '🤖';
+  if (d.includes('data')) return '📊';
+  if (d.includes('cyber') || d.includes('security')) return '🔒';
+  if (d.includes('ui') || d.includes('ux') || d.includes('design')) return '🎨';
+  return '📁';
+}
+
+function createApplicationCard(application) {
+  const wrapper = document.createElement('article');
+  wrapper.className = 'admin-card';
+
+  const appliedDate = application.createdAt 
+    ? new Date(application.createdAt).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }) 
+    : 'Unknown Date';
+
+  let buttonHtml = '';
+  if (application.status === 'accepted' || application.status === 'approved') {
+    const statusText = application.status === 'accepted' ? 'Accepted ✓' : 'Approved ✓';
+    buttonHtml = `
+      <div class="admin-actions-row">
+        <button class="btn btn-secondary" style="opacity: 0.7;" disabled>${statusText}</button>
+        <button class="btn btn-secondary download-offer-btn" data-id="${application.id}">
+          📥 Download Offer
+        </button>
+        <button class="btn btn-secondary resend-email-btn" data-id="${application.id}">
+          ✉️ Resend Email
+        </button>
+      </div>
+    `;
+  } else {
+    buttonHtml = `<button class="btn btn-secondary approve-btn" data-id="${application.id}">Approve Application</button>`;
+  }
+
+  wrapper.innerHTML = `
+    <div class="admin-card-header">
+      <div>
+        <h3>${application.fullName}</h3>
+        <p class="muted-text">${application.email}</p>
+      </div>
+      <span class="status-pill ${application.status}">${application.status.toUpperCase()}</span>
+    </div>
+    <div class="admin-card-body">
+      <p><strong>Domain:</strong> ${getDomainEmoji(application.domain)} ${application.domain}</p>
+      <p><strong>Submission Date:</strong> 📅 ${appliedDate}</p>
+      <p><strong>GitHub:</strong> 🔗 <a href="${application.github}" target="_blank">${application.github}</a></p>
+      <p><strong>LinkedIn:</strong> 🔗 <a href="${application.linkedin}" target="_blank">${application.linkedin}</a></p>
+      <p><strong>LeetCode:</strong> 🔗 <a href="${application.leetcode}" target="_blank">${application.leetcode}</a></p>
+      <p><strong>Resume:</strong> 📄 <a href="${application.resume}" target="_blank">Download Resume</a></p>
+      <p style="margin-top: 1rem; font-style: italic; opacity: 0.95;">"${application.message}"</p>
+    </div>
+    <div class="admin-card-footer">
+      ${buttonHtml}
+    </div>
+  `;
+
+  return wrapper;
+}
+
+function renderStats(applications) {
+  const total = applications.length;
+  const pending = applications.filter(a => a.status === 'pending').length;
+  const approved = applications.filter(a => a.status === 'approved').length;
+  const accepted = applications.filter(a => a.status === 'accepted').length;
+
+  const statsContainer = document.getElementById('adminStats');
+  if (!statsContainer) return;
+
+  statsContainer.innerHTML = `
+    <div class="admin-stat-card">
+      <h3>${total}</h3>
+      <p>Total Applicants</p>
+    </div>
+    <div class="admin-stat-card">
+      <h3>${pending}</h3>
+      <p>Pending Review</p>
+    </div>
+    <div class="admin-stat-card">
+      <h3>${approved}</h3>
+      <p>Approved Offers</p>
+    </div>
+    <div class="admin-stat-card">
+      <h3>${accepted}</h3>
+      <p>Accepted Offers</p>
+    </div>
+  `;
+}
+
+async function loadApplications() {
+  const adminPanel = document.getElementById('adminPanel');
+  if (!adminPanel) return;
+
+  try {
+    const response = await fetch('/api/applications');
+    if (!response.ok) {
+      adminPanel.innerHTML = '<p class="error-text">Unable to load applications. Permission Denied.</p>';
+      return;
+    }
+    const applications = await response.json();
+
+    renderStats(applications);
+
+    adminPanel.innerHTML = '';
+    if (!applications.length) {
+      adminPanel.innerHTML = '<p class="empty-state">No applications found yet.</p>';
+      return;
+    }
+
+    applications.forEach((application) => {
+      const card = createApplicationCard(application);
+      adminPanel.appendChild(card);
+    });
+
+    // Re-bind actions
+    document.querySelectorAll('.approve-btn:not([disabled])').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const id = button.dataset.id;
+        button.disabled = true;
+        button.textContent = 'Approving...';
+        const response = await fetch(`/api/applications/${id}/approve`, { method: 'POST' });
+        const result = await response.json();
+        if (result.success) {
+          loadApplications();
+        } else {
+          button.disabled = false;
+          button.textContent = 'Approve Application';
+          alert(result.message || 'Unable to approve application.');
+        }
+      });
+    });
+
+    document.querySelectorAll('.download-offer-btn').forEach((button) => {
+      button.addEventListener('click', () => {
+        const id = button.dataset.id;
+        window.location.href = `/api/applications/download-offer?id=${id}`;
+      });
+    });
+
+    document.querySelectorAll('.resend-email-btn').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const id = button.dataset.id;
+        button.disabled = true;
+        const originalText = button.innerHTML;
+        button.innerHTML = 'Sending...';
+
+        try {
+          const response = await fetch(`/api/applications/email-offer?id=${id}`, {
+            method: 'POST'
+          });
+          const result = await response.json();
+          if (result.success) {
+            button.innerHTML = 'Sent! ✓';
+            setTimeout(() => {
+              button.disabled = false;
+              button.innerHTML = originalText;
+            }, 3000);
+          } else {
+            button.disabled = false;
+            button.innerHTML = originalText;
+            alert(result.message || 'Failed to resend email.');
+          }
+        } catch (e) {
+          button.disabled = false;
+          button.innerHTML = originalText;
+          alert('Network error. Please try again.');
+        }
+      });
+    });
+  } catch (error) {
+    adminPanel.innerHTML = '<p class="error-text">Unable to load applications. Please try again later.</p>';
+    console.error(error);
+  }
+}
+
+// ==========================================
+// OFFER MODAL LOGIC
+// ==========================================
 
 function initOfferModal() {
   const offerModal = document.getElementById('offerModal');
@@ -677,7 +1097,7 @@ function initOfferModal() {
           acceptOfferBtn.style.borderColor = '#10b981';
           acceptOfferBtn.style.cursor = 'default';
           
-          checkApplicantStatus();
+          checkAuthStatus();
           setTimeout(closeOfferModal, 1200);
         } else {
           acceptOfferBtn.disabled = false;
@@ -738,8 +1158,10 @@ function init() {
   initFaqAccordion();
   initDomainCardClicks();
   initProjectModal();
-  checkApplicantStatus();
+  checkAuthStatus();
+  initLoginModal();
   initOfferModal();
+  init3DTilt();
   initEventListeners();
   initLoader();
 }

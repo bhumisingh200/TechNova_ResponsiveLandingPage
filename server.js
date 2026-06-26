@@ -209,7 +209,7 @@ function generateOfferLetterHtml(fullName, domain, onboardingTasks) {
       <p>To accept this offer and activate your internship status, please visit the portal page. If you are already logged in, you can accept directly from your candidate dashboard.</p>
 
       <div class="cta-container">
-        <a href="http://localhost:3000/login.html" class="btn">View &amp; Accept Offer</a>
+        <a href="http://localhost:3000/" class="btn">View &amp; Accept Offer</a>
       </div>
 
       <div class="signature-section">
@@ -296,7 +296,12 @@ const server = http.createServer(async (req, res) => {
   if (pathname === '/login' && method === 'POST') {
     try {
       const body = await readBody(req);
-      const params = querystring.parse(body);
+      let params;
+      try {
+        params = JSON.parse(body);
+      } catch (e) {
+        params = querystring.parse(body);
+      }
       const { role, email, password } = params;
       console.log(`[Login] Role: ${role}, Email: ${email}`);
 
@@ -307,43 +312,43 @@ const server = http.createServer(async (req, res) => {
           const sid = Math.random().toString(36).substr(2) + Date.now().toString(36);
           sessions[sid] = { role: 'admin', email };
           console.log(`[Login] Admin login success. Setting session: ${sid}`);
-          res.writeHead(302, {
+          res.writeHead(200, {
             'Set-Cookie': `sessionId=${sid}; Path=/; HttpOnly; SameSite=Strict`,
-            'Location': '/admin'
+            'Content-Type': 'application/json'
           });
-          res.end();
+          res.end(JSON.stringify({ success: true, role: 'admin' }));
           return;
         }
         console.log(`[Login] Admin login invalid credentials.`);
-        res.writeHead(302, { 'Location': '/login.html?error=invalid-admin' });
-        res.end();
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Invalid admin credentials.' }));
         return;
       }
 
       if (role === 'applicant') {
         if (!email || !password) {
           console.log(`[Login] Applicant login missing fields.`);
-          res.writeHead(302, { 'Location': '/login.html?error=missing' });
-          res.end();
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: false, message: 'Email and password are required.' }));
           return;
         }
         const sid = Math.random().toString(36).substr(2) + Date.now().toString(36);
         sessions[sid] = { role: 'applicant', email };
         console.log(`[Login] Applicant login success. Setting session: ${sid}`);
-        res.writeHead(302, {
+        res.writeHead(200, {
           'Set-Cookie': `sessionId=${sid}; Path=/; HttpOnly; SameSite=Strict`,
-          'Location': '/'
+          'Content-Type': 'application/json'
         });
-        res.end();
+        res.end(JSON.stringify({ success: true, role: 'applicant' }));
         return;
       }
 
-      res.writeHead(302, { 'Location': '/login.html' });
-      res.end();
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, message: 'Invalid role selection.' }));
     } catch (e) {
       console.error('[Login Error]', e);
-      res.writeHead(500, { 'Content-Type': 'text/plain' });
-      res.end('Internal Server Error');
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, message: 'Internal Server Error' }));
     }
     return;
   }
@@ -358,52 +363,79 @@ const server = http.createServer(async (req, res) => {
     }
     res.writeHead(302, {
       'Set-Cookie': 'sessionId=; Path=/; Max-Age=0; HttpOnly; SameSite=Strict',
-      'Location': '/login.html'
+      'Location': '/'
     });
     res.end();
     return;
   }
 
-  // Auth Protection Rules
+  // Redirect deprecated admin/login file paths to root page
+  if (pathname === '/login.html' || (pathname === '/login' && method === 'GET')) {
+    res.writeHead(302, { 'Location': '/' });
+    res.end();
+    return;
+  }
+  if (pathname === '/admin.html' || pathname === '/admin') {
+    res.writeHead(302, { 'Location': '/' });
+    res.end();
+    return;
+  }
+
+  // Auth Protection Rules for Protected APIs and pages
   const isApi = pathname.startsWith('/api/');
   if (!session) {
-    if (pathname === '/' || pathname === '/index.html' || pathname === '/admin' || pathname === '/admin.html' || (isApi && pathname !== '/api/subscribe')) {
-      console.log(`[Auth] Blocked unauthenticated request to ${pathname}. Redirecting to login.html`);
-      res.writeHead(302, { 'Location': '/login.html' });
-      res.end();
-      return;
-    }
-  } else {
-    // If logged in, block applicant from admin, and redirect signed-in users from login.html
-    if (pathname === '/login.html') {
-      const dest = session.role === 'admin' ? '/admin' : '/';
-      console.log(`[Auth] Authenticated user on login.html. Redirecting to ${dest}`);
-      res.writeHead(302, { 'Location': dest });
-      res.end();
-      return;
-    }
-    if ((pathname === '/admin' || pathname === '/admin.html') && session.role !== 'admin') {
-      console.log(`[Auth] Applicant requested admin route. Redirecting to /`);
-      res.writeHead(302, { 'Location': '/' });
-      res.end();
+    // Block protected APIs with a clean 401 response instead of a HTML redirect
+    if (isApi && pathname !== '/api/subscribe' && pathname !== '/api/status' && pathname !== '/api/apply') {
+      console.log(`[Auth] Blocked unauthenticated API request to ${pathname}.`);
+      res.writeHead(401, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, loggedIn: false, message: 'Sign in to access this portal.' }));
       return;
     }
   }
 
-  // 3. API: Status
+  // 3. API: Status (Unified Endpoint for Session check & Application status)
   if (pathname === '/api/status' && method === 'GET') {
     try {
+      if (!session) {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, loggedIn: false }));
+        return;
+      }
+      
       const email = session.email;
+      const role = session.role;
+      
+      if (role === 'admin') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, loggedIn: true, role: 'admin', email }));
+        return;
+      }
+
+      // Role is applicant
       const appRecord = db.querySingle(`SELECT * FROM applications WHERE email = ${db.escape(email)}`);
       
       if (appRecord) {
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: true, status: appRecord.status, application: appRecord }));
+        res.end(JSON.stringify({ 
+          success: true, 
+          loggedIn: true, 
+          role: 'applicant', 
+          email, 
+          status: appRecord.status, 
+          application: appRecord 
+        }));
       } else {
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: true, status: 'none' }));
+        res.end(JSON.stringify({ 
+          success: true, 
+          loggedIn: true, 
+          role: 'applicant', 
+          email, 
+          status: 'none' 
+        }));
       }
     } catch (e) {
+      console.error(e);
       res.writeHead(500, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: false, message: 'Server error retrieving status.' }));
     }
@@ -450,7 +482,15 @@ const server = http.createServer(async (req, res) => {
         )
       `);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      // Set cookie to auto-login the applicant on success!
+      const sid = Math.random().toString(36).substr(2) + Date.now().toString(36);
+      sessions[sid] = { role: 'applicant', email };
+      console.log(`[Apply] Auto-login success for ${email}. Session: ${sid}`);
+
+      res.writeHead(200, {
+        'Set-Cookie': `sessionId=${sid}; Path=/; HttpOnly; SameSite=Strict`,
+        'Content-Type': 'application/json'
+      });
       res.end(JSON.stringify({ success: true, message: 'Your internship application has been submitted successfully.' }));
     } catch (e) {
       console.error(e);
