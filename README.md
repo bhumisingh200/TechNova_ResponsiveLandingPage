@@ -2,561 +2,267 @@
 
 <div align="center">
 
-### A Premium Full-Stack Internship Management Platform
+### A Modern Full-Stack Internship Management Platform
 
-Modern • Responsive • Secure • Feature-Rich
+A premium internship portal where students can apply for internships, track their application status, and receive offer letters, while administrators can review applications, manage candidates, and automate onboarding.
 
-Streamlining the internship application, evaluation, onboarding, and offer management process through an elegant student and administrator experience.
-
-[Live Demo](#) • [Report Bug](#) • [Request Feature](#)
+**HTML • CSS • JavaScript • Node.js • MySQL**
 
 </div>
 
 ---
 
-## 📖 Overview
+# 📖 Overview
 
-TechNova Internship Portal is a comprehensive internship management platform designed to simplify the complete internship lifecycle—from student applications to onboarding and offer acceptance.
+TechNova Internship Portal is a full-stack web application that simulates a real-world internship recruitment system.
 
-The platform combines a modern responsive landing page, application management system, administrator dashboard, resume processing, automated offer letter generation, email notifications, and internship progress tracking into a unified experience.
-
-This project demonstrates advanced frontend development, backend engineering, database integration, session management, file handling, and email automation using pure Node.js and MySQL.
+Applicants can explore internship programs, submit applications with their professional profiles and resume, track their application progress, and access onboarding resources. Administrators can securely review applications, approve candidates, manage internship workflows, and generate offer letters.
 
 ---
 
-# ✨ Key Highlights
+# ✨ Features
 
-### 🎓 Student Experience
+## 👨‍🎓 Student Portal
 
-✔ Explore internship opportunities
-
-✔ Submit internship applications
-
-✔ Upload resumes
-
-✔ Share GitHub, LinkedIn & LeetCode profiles
-
-✔ Track application status in real-time
-
-✔ Access onboarding instructions
-
-✔ Download official offer letters
-
-✔ Accept internship offers digitally
-
----
-
-### 🏢 Administrator Experience
-
-✔ Secure admin authentication
-
-✔ Review candidate profiles
-
-✔ Download resumes
-
-✔ Approve applications
-
-✔ Generate internship offers
-
-✔ Send automated emails
-
-✔ Track candidate progress
-
-✔ Re-send offer letters when required
-
----
-
-# 🌟 Features
-
-## 🎯 Modern Landing Page
-
-A visually appealing and fully responsive landing page designed to create a professional first impression.
-
-### Includes
-
-* Animated Hero Section
-* Typing Text Effect
-* Floating Internship Cards
-* Internship Domain Showcase
-* Learning Journey Timeline
-* Animated Statistics Counters
-* Testimonials Carousel
-* FAQ Accordion
+* Responsive Landing Page
+* Internship Program Showcase
+* Student Login
+* Internship Application Form
+* GitHub, LinkedIn & LeetCode Profile Submission
+* Resume Upload (PDF)
+* Application Status Tracking
+* Student Dashboard
+* Download Offer Letter
+* Accept Internship Offer
 * Newsletter Subscription
 * Contact Form
-* Smooth Scrolling Navigation
 
 ---
 
-## 💼 Internship Domains
+## 🏢 Admin Portal
 
-Students can explore various internship tracks:
-
-| Domain           | Description                         |
-| ---------------- | ----------------------------------- |
-| Web Development  | Frontend & Backend Development      |
-| Java Development | Core Java & Enterprise Applications |
-| AI / ML          | Machine Learning Fundamentals       |
-| Data Science     | Analytics & Data Processing         |
-| Cyber Security   | Security Fundamentals               |
-| UI/UX Design     | Design Thinking & User Experience   |
-
----
-
-## 📝 Internship Application System
-
-Students can apply directly through the platform.
-
-### Application Details Collected
-
-* Full Name
-* Email Address
-* Internship Domain
-* GitHub Profile
-* LinkedIn Profile
-* LeetCode Profile
-* Resume Upload
-* Cover Message
-
-### Validation Features
-
-* Email Validation
-* Required Fields Validation
-* Resume Validation
-* URL Verification
-* Client-Side Error Handling
-
----
-
-## 📂 Resume Management
-
-Applicants can upload their resumes directly during the application process.
-
-### Supported Features
-
-* PDF Resume Upload
-* Secure Storage
-* Resume Retrieval
-* Admin Download Access
-
----
-
-## 📊 Application Tracking System
-
-Every application progresses through multiple stages.
-
-### Workflow
-
-```text
-Not Applied
-     ↓
-Pending Review
-     ↓
-Approved
-     ↓
-Accepted
-```
-
-Students can monitor their status using the onboarding dashboard.
-
----
-
-## 🎓 Student Dashboard
-
-The onboarding dashboard provides:
-
-### Features
-
-* Application Status Tracking
-* Internship Progress Updates
-* Assigned Tasks
-* Offer Letter Access
-* Internship Acceptance Workflow
-* Onboarding Guidance
-
----
-
-## 🏢 Admin Dashboard
-
-A dedicated administrator portal for managing applicants.
-
-### Administrative Controls
-
-#### Candidate Management
-
-* Review Applications
-* View Candidate Profiles
-* Download Resumes
-* Review GitHub Profiles
-* Review LinkedIn Profiles
-* Review LeetCode Profiles
-
-#### Application Actions
-
+* Secure Admin Login
+* View All Applications
+* Download Applicant Resumes
+* Review GitHub / LinkedIn / LeetCode Profiles
 * Approve Applications
-* Track Application Progress
-* Monitor Internship Domains
-* Manage Candidate Records
+* Generate Offer Letters
+* Send Offer Letter via Email
+* Track Candidate Status
 
 ---
 
-## 📧 Automated Offer Letter System
+## 🎨 UI Features
 
-Upon approval, the platform automatically generates a professional internship offer letter.
-
-### Student Capabilities
-
-* View Offer Letter
-* Download Offer Letter
-* Request Email Copy
-* Accept Offer
-
-### Administrator Capabilities
-
-* Generate Offer Letter
-* Download Offer Letter
-* Re-Send Offer Emails
-
-### Email System
-
-Custom SMTP implementation built entirely using Node.js native networking modules.
-
----
-
-## 🌙 Dark Mode Support
-
-A complete light and dark theme system.
-
-### Features
-
-* One-Click Theme Switching
-* Theme Persistence
-* LocalStorage Integration
-* Smooth Transitions
-* Cross-Page Consistency
-
----
-
-# 🎨 UI / UX Highlights
-
-### Premium Design System
-
-* Glassmorphism Components
-* Modern Gradients
-* Floating Elements
-* Responsive Layouts
-* Custom Scrollbar
-* Animated Buttons
-* Interactive Cards
-* Soft Shadows
-* Consistent Design Language
-
-### User Experience Enhancements
-
+* Responsive Design
+* Glassmorphism UI
+* Dark / Light Theme
+* Typing Animation
+* Animated Statistics
+* Scroll Reveal Animations
+* FAQ Accordion
+* Testimonials Carousel
 * Sticky Navigation
 * Mobile Hamburger Menu
-* Back-To-Top Button
-* Scroll Reveal Animations
-* Smooth Page Transitions
-* Loading Effects
+* Smooth Scrolling
+* Back-to-Top Button
 
 ---
 
-# 🛠 Technology Stack
+# 🛠 Tech Stack
 
-## Frontend
+### Frontend
 
 * HTML5
 * CSS3
 * JavaScript (ES6)
 
-## Backend
+### Backend
 
 * Node.js
-* HTTP Module
-* FS Module
-* Path Module
-* Querystring Module
+* Native HTTP Module
+* File System (FS)
+* SMTP Mail Service
 
-## Database
+### Database
 
 * MySQL
 
-## Authentication
+### Authentication
 
-* Session-Based Authentication
-* HTTP-Only Cookies
-
-## Email Service
-
-* Native SMTP Client
-* Automated Email Generation
+* HTTP-Only Cookie Sessions
 
 ---
 
-# 🧠 Concepts Demonstrated
-
-### Frontend Engineering
-
-* Responsive Web Design
-* DOM Manipulation
-* Form Validation
-* Event Handling
-* Local Storage
-* CSS Variables
-* Animations
-* Accessibility
-
-### Backend Engineering
-
-* API Development
-* Session Management
-* Authentication
-* File Handling
-* Resume Processing
-* Email Automation
-
-### Database Management
-
-* MySQL Integration
-* CRUD Operations
-* Data Persistence
-
----
-
-# 📁 Project Structure
+# 📂 Project Structure
 
 ```text
 TechNova_ResponsiveLandingPage/
 │
-├── index.html       # Unified SPA (Landing page, Student Dashboard, Admin Panel)
-├── styles.css       # Premium responsive layout styles (Glassmorphism, 3D tilt, dark/light variables)
-├── script.js        # Core client-side interactions, form validation, 3D tilt, administrative AJAX handlers
-│
-├── server.js        # Node.js backend server handling sessions, auth routes, and API logic
-├── db.js            # Database wrapper executing native MySQL queries via execSync
-├── mail.js          # Native SMTP email implementation for dispatching offer letters
-│
-├── uploads/         # Directory for storing submitted candidate PDF resumes
-├── .env.example     # Template for environment variables config
-└── README.md        # Comprehensive documentation
+├── index.html
+├── styles.css
+├── script.js
+├── server.js
+├── db.js
+├── mail.js
+├── uploads/
+├── sent_emails/
+└── README.md
 ```
 
 ---
 
 # 🚀 Getting Started
 
-Follow these instructions to set up and run the project locally.
+## Prerequisites
 
-### Prerequisites
+* Node.js (v14+)
+* MySQL Server
 
-1. **Node.js**: Install Node.js (v14 or higher).
-2. **MySQL Server**: Install MySQL Server. Ensure `mysql` or `mysql.exe` is configured in your system environment path or matches the configuration in `db.js`.
-   - Default MySQL executable path: `C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe`
-   - Default Database name: `technova_db`
-   - Default Root User: `root`
-   - Default Password: `Bhumi@2006`
+## Installation
 
-### Database Setup
+```bash
+git clone <repository-url>
 
-Run the following SQL queries in your MySQL console to initialize the database schema:
+cd TechNova_ResponsiveLandingPage
 
-```sql
-CREATE DATABASE IF NOT EXISTS technova_db;
-USE technova_db;
+npm install
 
-CREATE TABLE IF NOT EXISTS applications (
-  id VARCHAR(255) PRIMARY KEY,
-  fullName VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL UNIQUE,
-  message TEXT,
-  github VARCHAR(255) NOT NULL,
-  linkedin VARCHAR(255) NOT NULL,
-  leetcode VARCHAR(255) NOT NULL,
-  domain VARCHAR(100) NOT NULL,
-  resume VARCHAR(255) NOT NULL,
-  status VARCHAR(50) DEFAULT 'pending',
-  createdAt VARCHAR(255) NOT NULL
-);
+node server.js
 ```
 
-### Installation & Run
+Open:
 
-1. Clone or copy this repository to your local system.
-2. Navigate to the project directory:
-   ```bash
-   cd TechNova_ResponsiveLandingPage
-   ```
-3. Create a `.env` file in the root directory by copying `.env.example`:
-   ```bash
-   cp .env.example .env
-   ```
-4. Update the port, session secret, and optional SMTP settings inside the `.env` file as needed.
-5. Start the Node.js server:
-   ```bash
-   node server.js
-   ```
-6. Open your web browser and navigate to:
-   ```text
-   http://localhost:3000/
-   ```
+```text
+http://localhost:3000
+```
+
+---
+
+# ⚙ Environment Variables
+
+Create a `.env` file:
+
+```env
+PORT=3000
+
+SESSION_SECRET=your_secret_key
+
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=your_password
+
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=your_database_password
+DB_NAME=technova_db
+
+SMTP_HOST=your_host
+SMTP_PORT=587
+SMTP_USER=your_email
+SMTP_PASS=your_password
+```
+
+---
+
+# 🗄 Database
+
+Create:
+
+* applications
+* newsletter_subscribers
+
+Import the SQL schema included in the project.
+
+---
+
+# 🔄 Application Workflow
+
+```text
+Student
+     │
+     ▼
+Apply for Internship
+     │
+Upload Resume
+     │
+Pending Review
+     │
+───────────────
+Admin Reviews
+───────────────
+     │
+Approve
+     │
+Offer Letter Generated
+     │
+Student Accepts Offer
+```
 
 ---
 
 # 📸 Screenshots
 
-After completing the project, create a folder:
+Create a folder named:
 
 ```text
 screenshots/
 ```
 
-Add these screenshots:
+Include these images:
 
-### 1. Homepage Hero Section
+| Screenshot          | File Name              |
+| ------------------- | ---------------------- |
+| Homepage            | homepage.png           |
+| Internship Programs | internship-domains.png |
+| Learning Journey    | learning-journey.png   |
+| Student Login       | student-login.png      |
+| Application Form    | application-form.png   |
+| Student Dashboard   | student-dashboard.png  |
+| Admin Dashboard     | admin-dashboard.png    |
+| Candidate Approval  | candidate-approval.png |
+| Offer Letter        | offer-letter.png       |
+| Email Preview       | email-preview.png      |
+| Dark Mode           | dark-mode.png          |
+| Mobile View         | mobile-view.png        |
 
-File:
+Example:
 
-```text
-screenshots/homepage.png
+```md
+## Homepage
+
+![Homepage](screenshots/homepage.png)
+
+## Student Dashboard
+
+![Dashboard](screenshots/student-dashboard.png)
+
+## Admin Dashboard
+
+![Admin](screenshots/admin-dashboard.png)
 ```
-
-Capture:
-
-* Hero Banner
-* Typing Animation
-* CTA Buttons
 
 ---
 
-### 2. Internship Domains Section
-
-File:
-
-```text
-screenshots/domains.png
-```
-
-Capture:
-
-* Internship Cards
-* Hover Effects
-
----
-
-### 3. Student Application Form
-
-File:
-
-```text
-screenshots/application-form.png
-```
-
-Capture:
-
-* GitHub Field
-* LinkedIn Field
-* LeetCode Field
-* Resume Upload
-
----
-
-### 4. Student Dashboard
-
-File:
-
-```text
-screenshots/student-dashboard.png
-```
-
-Capture:
-
-* Status Tracking
-* Tasks
-* Offer Access
-
----
-
-### 5. Admin Dashboard
-
-File:
-
-```text
-screenshots/admin-dashboard.png
-```
-
-Capture:
-
-* Candidate List
-* Resume Download
-* Approval Actions
-
----
-
-### 6. Offer Letter Preview
-
-File:
-
-```text
-screenshots/offer-letter.png
-```
-
-Capture:
-
-* Generated Offer Letter
-
----
-
-### 7. Dark Mode
-
-File:
-
-```text
-screenshots/dark-mode.png
-```
-
-Capture:
-
-* Entire Page in Dark Theme
-
----
-
-### 8. Mobile Responsive View
-
-File:
-
-```text
-screenshots/mobile-view.png
-```
-
-Capture:
-
-* Mobile Navigation
-* Responsive Layout
-
----
-
-# 🚀 Future Enhancements
+# 🚀 Future Improvements
 
 * AI Resume Screening
-* Candidate Ranking System
 * Interview Scheduling
 * Certificate Generation
-* Analytics Dashboard
 * Multi-Admin Support
-* Role-Based Access Control
-* AI Internship Recommendations
+* Analytics Dashboard
+* AI Candidate Ranking
 
 ---
 
 # 👩‍💻 Author
 
-### Bhumi Singh
+**Bhumi Singh**
 
 B.Tech CSE (AI)
 
-Aspiring Software Engineer • Java Developer • Full Stack Developer
+Aspiring Software Engineer | Java Developer | Full Stack Developer
 
 ---
 
-⭐ If you found this project interesting, consider giving it a star on GitHub.
+⭐ If you found this project useful, consider giving it a star.
+
